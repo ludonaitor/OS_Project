@@ -6,6 +6,11 @@
 
 */
 
+
+//Aggiungiamo la lista dei semafori
+extern ListHead semaphores_list;
+
+
 extern PCB* init_pcb; // pcb of the init process
 extern PCB* running;  // pcb of the currently running process
 extern int last_pid;  // last pid to be generates
