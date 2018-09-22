@@ -10,8 +10,6 @@
 
 #else //_DISASTROS_DEBUG_
 
-#define disastrOS_debug(...) ;
-
 #endif //_DISASTROS_DEBUG_
 
 // initializes the structures and spawns a fake init process
@@ -28,6 +26,11 @@ int disastrOS_wait(int pid, int* retval);
 void disastrOS_preempt();
 void disastrOS_spawn(void (*f)(void*), void* args );
 void disastrOS_shutdown();
+
+int disastrOS_semopen(int id,int value);
+int disastrOS_semclose(int id);
+int disastrOS_semwait(int id);
+int disastrOS_sempost(int id);
 
 // timers
 void disastrOS_sleep(int);
