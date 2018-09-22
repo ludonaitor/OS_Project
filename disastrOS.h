@@ -10,8 +10,6 @@
 
 #else //_DISASTROS_DEBUG_
 
-#define disastrOS_debug(...) ;
-
 #endif //_DISASTROS_DEBUG_
 
 // initializes the structures and spawns a fake init process
