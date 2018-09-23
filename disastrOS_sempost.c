@@ -9,8 +9,14 @@
 void internal_semPost(){
     int fd = running -> syscall_args[0];
     SemDescriptor* des = SemDescriptorList_byFd(&running->sem_descriptors,fd);
+    if(!des) {
+        running -> syscall_retvalue = DSOS_SEMNOTFD;
+    }
 
     Semaphore* sem = des -> semaphore;
+    if(!sem) {
+        running -> syscall_retvalue = DSOS_SEMNOTSEM;
+    }
 
     (sem -> count)++;
 
@@ -18,12 +24,12 @@ void internal_semPost(){
 
     SemDescriptorPtr* desptr = (SemDescriptorPtr*) List_detach(&(sem->waiting_descriptors), (ListItem*) (sem->waiting_descriptors).first);
 
-        PCB* pcb = desptr->descriptor->pcb;              //prendo il pcb del processo appena preso
+        PCB* pcb = desptr->descriptor->pcb;              //assegno il pcb attualmente in running
         List_insert(&sem->descriptors, sem->descriptors.last, (ListItem*) desptr);
-        List_detach(&waiting_list, (ListItem*) pcb);                               //lo rimuovo dalla lista di attesa...
-        List_insert(&ready_list, (ListItem*) ready_list.last, (ListItem*) pcb);    //e lo inserisco in quello dei processi ready
+        List_detach(&waiting_list, (ListItem*) pcb);                               //rimuovo dalla lista di attesa
+        List_insert(&ready_list, (ListItem*) ready_list.last, (ListItem*) pcb);    //lo inserisco in quello dei processi ready
 
-        pcb->status = Ready;                                           //cambio lo status del processo
+        pcb->status = Ready;                                           //assegno alo stato del pcb il nuovo stato attuale
 
     }
 
