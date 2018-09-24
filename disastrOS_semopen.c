@@ -6,6 +6,9 @@
 #include "disastrOS_semaphore.h"
 #include "disastrOS_semdescriptor.h"
 
+#include "disastrOS_globals.h"
+#include "disastrOS_constants.h"
+
 void internal_semOpen(){
 
     int id = running->syscall_args[0];    		//Primo Argomento sem_open

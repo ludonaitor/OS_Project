@@ -1,5 +1,4 @@
 #pragma once
-#include testcontributer.h //da eliminare
 #include "disastrOS_pcb.h"
 #include "linked_list.h"
 
@@ -9,6 +8,8 @@
 #define disastrOS_debug(...) printf(__VA_ARGS__)
 
 #else //_DISASTROS_DEBUG_
+
+#define disastrOS_debug(...) ;
 
 #endif //_DISASTROS_DEBUG_
 
