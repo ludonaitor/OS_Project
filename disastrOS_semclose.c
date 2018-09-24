@@ -41,7 +41,7 @@ void internal_semClose(){
     return;
   }
 
-  sem_desc = (SemDescriptor*) List_detach(running->sem_descriptors, (ListItem*) sem_desc);
+  sem_desc = (SemDescriptor*) List_detach(&running->sem_descriptors, (ListItem*) sem_desc);
 
   //Rilascio delle risorse del SemDescriptor
   controllo = SemDescriptor_free(sem_desc);
