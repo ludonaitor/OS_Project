@@ -20,14 +20,12 @@ void internal_semWait(){
     running->syscall_retvalue = DSOS_SEMNOTFD;
     return;
   }
-    printf("HO TROVATO IL SEMDESCRIPTOR\n");
   SemDescriptorPtr* descptr = des->ptr;
   //Controlla che il semaforo preso dal SemDescriptorPtr esista
   if(!descptr){
     running -> syscall_retvalue = DSOS_SEMNOTDESPTR;
     return;
   }
-    printf("HO TROVATO IL SEMDESCRIPTORptr\n");
 
   //Controllo errore dell'esistenza del semafono preso dal SemDescriptor
   Semaphore* sem = des -> semaphore;
@@ -35,13 +33,12 @@ void internal_semWait(){
     running->syscall_retvalue = DSOS_SEMNOTSEM;
     return;
   }
-  printf("HO TROVATO IL SEMAFORO\n");
 
   PCB* p;
   //Decremento il semaforo in quanto chiamata wait
   sem->count = (sem->count-1);
   if(sem->count < 0){
-      printf("SONO ENTRATO IN WAIT\n");
+      printf("%d È ENTRATO IN WAIT\n\n", disastrOS_getpid());
     List_detach(&sem->descriptors, (ListItem*)descptr); //rimuovo il descptr dalla lista descrittori
     List_insert(&sem->waiting_descriptors, sem->waiting_descriptors.last, (ListItem*)descptr); //inserisco lo stesso descptr nella waiting list dei descriptors
     List_insert(&waiting_list, waiting_list.last, (ListItem*) running);//il processo corrente è inserito nella waiting list all'ultimo posto

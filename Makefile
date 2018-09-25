@@ -1,5 +1,5 @@
 CC=gcc
-CCOPTS=--std=gnu99 -Wall 
+CCOPTS=--std=gnu99 -Wall
 AR=ar
 
 HEADERS=disastrOS.h\
@@ -43,7 +43,10 @@ OBJS=pool_allocator.o\
 
 LIBS=libdisastrOS.a
 
-BINS=disastrOS_test
+BINS=disastrOS_test\
+			disastrOS_test2\
+			disastrOS_test3
+
 
 #disastros_test
 
@@ -55,11 +58,15 @@ all:	$(LIBS) $(BINS)
 %.o:	%.c $(HEADERS)
 	$(CC) $(CCOPTS) -c -o $@  $<
 
-libdisastrOS.a: $(OBJS) $(HEADERS) 
+libdisastrOS.a: $(OBJS) $(HEADERS)
 	$(AR) -rcs $@ $^
 	$(RM) $(OBJS)
 
 disastrOS_test:		disastrOS_test.c $(LIBS)
+	$(CC) $(CCOPTS) -o $@ $^
+disastrOS_test2:		disastrOS_test2.c $(LIBS)
+	$(CC) $(CCOPTS) -o $@ $^
+disastrOS_test3:		disastrOS_test3.c $(LIBS)
 	$(CC) $(CCOPTS) -o $@ $^
 
 clean:

@@ -131,6 +131,11 @@ if(disastrOS_getpid() > 1){
 
   printf("PID: %d, terminating\n", disastrOS_getpid());
 
+  disastrOS_semclose(sem_empty);
+  disastrOS_semclose(sem_filled);
+  disastrOS_semclose(sem_prod);
+  disastrOS_semclose(sem_cons);
+
 /*
   for (int i=0; i<(disastrOS_getpid()+1); ++i){
     printf("PID: %d, iterate %d\n", disastrOS_getpid(), i);
