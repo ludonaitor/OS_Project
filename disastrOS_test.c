@@ -152,9 +152,9 @@ void initFunction(void* args) {
   disastrOS_spawn(sleeperFunction, 0);
 
 
-  printf("I feel like to spawn 10 nice threads\n");
+  printf("I feel like to spawn 8 nice threads\n");
   int alive_children=0;
-  for (int i=0; i<5; ++i) {
+  for (int i=0; i<8; ++i) {
     //int type=0;
     int mode=DSOS_CREATE;
     printf("mode: %d\n", mode);
